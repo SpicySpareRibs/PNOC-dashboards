@@ -1,7 +1,7 @@
 import pandas
 from bisect import bisect_left
 from typing import Protocol,Literal
-filetype = Literal["Training Summary Report", "Staffing Summary","Plantilla of Personnel"]
+filetype = Literal["Training Summary Report", "Staffing Summary","Plantilla of Personnel","Procurement Monitoring Report"]
 
 
 class Datafile:
