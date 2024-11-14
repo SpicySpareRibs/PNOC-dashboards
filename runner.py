@@ -2,7 +2,7 @@ from recompiler import Datafile, filetype
 from plantilla_recompiler import PlantillaOfPersonnelCompiler
 from training_summary_recompiler import TrainingSummaryRecompiler
 from contract_recompiler import ContractCompiler
-
+from proc_monitorning_report import ProcMonitoringCompiler
 class RecompilerMaker():
     def make(datafile: Datafile):
         if datafile.filetype == "Training Summary Report":
@@ -11,6 +11,8 @@ class RecompilerMaker():
             return PlantillaOfPersonnelCompiler(datafile)
         if datafile.filetype == "Contract of Service":
             return ContractCompiler(datafile)
+        if datafile.filetype == "Procurement Monitoring Report":
+            return ProcMonitoringCompiler(datafile)
 
 datafile = Datafile("HR\Mock_TRAINING SUMMARY REPORT.xlsx","Training Summary Report")
 test_recompiler = RecompilerMaker.make(datafile=datafile)
