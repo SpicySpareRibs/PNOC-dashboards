@@ -13,7 +13,7 @@ class ProcMonitoringCompiler():
         self._stages = None
         self._record_stages = None
         self._record = None
-        self._record_code = None
+        self._record_codes = None
 
     def get_headers(self):
         pass
@@ -44,6 +44,14 @@ class ProcMonitoringCompiler():
         return hidden_cols 
     def replace_header(self,level0,level1):
             pass
+
+    def drop_empty_in_col(self,dataframe,col_index):
+        df = dataframe
+        return df.dropna(subset=[df.columns[0]])
+        
+        
+
+        
     def replace_date(self, timestamp):
         
         try: 
@@ -53,6 +61,7 @@ class ProcMonitoringCompiler():
         except:
             print("Error: input is not a timestamp")
             return timestamp
+    
     def read_datafile(self):
         df = pandas.read_excel(self._datafile.filepath,sheet_name="RMB-PMR 2024 ",header=[6,7],)
         hidden_cols = self.get_hidden_cols(len(df.columns))
@@ -72,19 +81,25 @@ class ProcMonitoringCompiler():
         for i, col in enumerate(df.columns):
             print(f"{i}: {col}")
     
-        df[df.columns[5]] = df.apply(lambda x: self.replace_date(x[df.columns[5]]),axis = 1)
-
-        self._datafile = df
+        
+        df = self.drop_empty_in_col(df,0)
+        df["number"] = df.index
+        self._dataframe = df
 
     
 
     def reformat(self):
-        pass
+        df = self._dataframe
+
+        self._record_codes = df[["number",df.columns[0]]]
+        print(self._record_codes)
+
     def export(self):
-        with pandas.ExcelWriter('PMR.xlsx',datetime_format="MM-DD-YYYY",date_format="YYYY-MM-DD") as writer:     
-            self._datafile.to_excel(writer,sheet_name="test",index=False)
+        with pandas.ExcelWriter('PMR.xlsx',datetime_format="MM-DD-YYYY",date_format="MM-DD-YYYY") as writer:     
+            self._dataframe.to_excel(writer,sheet_name="test",index=False)
             
 df = Datafile(filepath="Procurement\PMR.xlsx",filetype="Procurement Monitoring Report")
 test = ProcMonitoringCompiler(datafile=df)
 test.read_datafile()
+test.reformat()
 test.export()
