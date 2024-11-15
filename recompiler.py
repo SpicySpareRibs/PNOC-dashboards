@@ -1,23 +1,18 @@
-import pandas
-from bisect import bisect_left
 from typing import Protocol,Literal
 
-
-
-filetype = Literal["Training Summary Report", 
-                   "Staffing Summary",
-                   "Plantilla of Personnel", 
-                   "Contract of Service",
-                   "Procurement Monitoring Report"]
-
-
+filetype = Literal[
+    "Training Summary Report",
+    "Staffing Summary",
+    "Plantilla of Personnel",
+    "Contract of Service",
+    "Procurement Monitoring Report",
+    "Inventory of Clients",
+    ]
 
 class Datafile:
     def __init__(self, filepath,filetype: filetype):
         self.filepath = filepath
         self.filetype = filetype
-
-
 
 class Recompiler(Protocol):
     def read_datafile(self):
@@ -39,5 +34,3 @@ class Recompiler(Protocol):
         pass
         #use pandas.ExcelWriter() and .to_excel() to output a new excel file
         #1 excel file for now is to one recompiler, 1 excel file can contain multiple sheets as tables
-
-
