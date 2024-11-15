@@ -4,7 +4,11 @@ from typing import Protocol,Literal
 
 
 
-filetype = Literal["Training Summary Report", "Staffing Summary","Plantilla of Personnel", "Contract of Service","Procurement Monitoring Report"]
+filetype = Literal["Training Summary Report", 
+                   "Staffing Summary",
+                   "Plantilla of Personnel", 
+                   "Contract of Service",
+                   "Procurement Monitoring Report"]
 
 
 
