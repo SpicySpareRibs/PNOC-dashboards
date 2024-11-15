@@ -5,7 +5,6 @@ from contract_recompiler import ContractCompiler
 from proc_monitorning_report import ProcMonitoringCompiler
 from inventory_of_clients_recompiler import InventoryOfClientsRecompiler
 
-
 class RecompilerMaker():
     def make(datafile: Datafile):
         match datafile.filetype:
