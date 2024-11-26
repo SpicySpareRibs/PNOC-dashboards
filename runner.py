@@ -4,7 +4,7 @@ from training_summary_recompiler import TrainingSummaryRecompiler
 from contract_recompiler import ContractCompiler
 from proc_monitorning_report import ProcMonitoringCompiler
 from inventory_of_clients_recompiler import InventoryOfClientsRecompiler
-
+from staffing_summary_recompiler import StaffingSummaryRecompiler
 class RecompilerMaker():
     def make(datafile: Datafile):
         match datafile.filetype:
@@ -18,6 +18,8 @@ class RecompilerMaker():
                 return ProcMonitoringCompiler(datafile)
             case "Inventory of Clients":
                 return InventoryOfClientsRecompiler(datafile)
+            case "Staffing Summary":
+                return StaffingSummaryRecompiler(datafile)
             case _:
                 print("Invalid Input")
                 return None
@@ -35,7 +37,7 @@ test_recompiler2.read_datafile()
 test_recompiler2.reformat()
 test_recompiler2.export()
 
-datafile3 = Datafile("HR\Mock_2024 Contract of Service.xlsx","Contract of Service")
+datafile3 = Datafile("HR\Mock_2024 Contract of Service Employees.xlsx","Contract of Service")
 test_recompiler3 = RecompilerMaker.make(datafile=datafile3)
 test_recompiler3.read_datafile()
 test_recompiler3.export()
@@ -45,3 +47,9 @@ test_recompiler4 = RecompilerMaker.make(datafile=datafile4)
 test_recompiler4.read_datafile()
 test_recompiler4.reformat()
 test_recompiler4.export()
+
+datafile5 = Datafile("HR\Mock_PNOC Staffing Summary As of 2nd Quarter 2024 (1).xlsx",filetype="Staffing Summary")
+test_recompiler5 = StaffingSummaryRecompiler(datafile5)
+test_recompiler5.read_datafile()
+test_recompiler5.reformat()
+test_recompiler5.export()
