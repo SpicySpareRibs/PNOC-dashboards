@@ -97,9 +97,10 @@ class ProcMonitoringCompiler():
     def export(self):
         with pandas.ExcelWriter('PMR.xlsx',datetime_format="MM-DD-YYYY",date_format="MM-DD-YYYY") as writer:     
             self._dataframe.to_excel(writer,sheet_name="test",index=False)
-            
-df = Datafile(filepath="Procurement\PMR.xlsx",filetype="Procurement Monitoring Report")
-test = ProcMonitoringCompiler(datafile=df)
-test.read_datafile()
-test.reformat()
-test.export()
+
+# Under Dev            
+# df = Datafile(filepath="Procurement\PMR.xlsx",filetype="Procurement Monitoring Report")
+# test = ProcMonitoringCompiler(datafile=df)
+# test.read_datafile()
+# test.reformat()
+# test.export()
