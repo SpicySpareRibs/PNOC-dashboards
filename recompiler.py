@@ -7,6 +7,7 @@ filetype = Literal[
     "Contract of Service",
     "Procurement Monitoring Report",
     "Inventory of Clients",
+    "Annual Procurement Plan",
     ]
 
 class Datafile:
