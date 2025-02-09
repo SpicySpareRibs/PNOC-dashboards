@@ -2,7 +2,7 @@ from typing import Protocol
 from recompiler import Datafile, Recompiler
 import pandas as pd
 
-class PAPSupertaskRecompiler():
+class AnnualProcurementPlanRecompiler():
     def __init__(self, datafile):
         self._datafile = datafile
         self._df_subtasks = None

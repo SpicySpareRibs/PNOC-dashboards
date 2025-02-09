@@ -1,4 +1,4 @@
-from annual_procurement_plan_recompiler import PAPSupertaskRecompiler
+from annual_procurement_plan_recompiler import AnnualProcurementPlanRecompiler
 from recompiler import Datafile, filetype
 from plantilla_recompiler import PlantillaOfPersonnelCompiler
 from training_summary_recompiler import TrainingSummaryRecompiler
@@ -22,7 +22,7 @@ class RecompilerMaker():
             case "Staffing Summary":
                 return StaffingSummaryRecompiler(datafile)
             case "Annual Procurement Plan":
-                return PAPSupertaskRecompiler(datafile)
+                return AnnualProcurementPlanRecompiler(datafile)
             case _:
                 print("Invalid Input")
                 return None
