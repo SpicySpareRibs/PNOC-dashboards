@@ -1,4 +1,4 @@
-from app_supertask_recompiler import PAPSupertaskRecompiler
+from annual_procurement_plan_recompiler import PAPSupertaskRecompiler
 from recompiler import Datafile, filetype
 from plantilla_recompiler import PlantillaOfPersonnelCompiler
 from training_summary_recompiler import TrainingSummaryRecompiler
