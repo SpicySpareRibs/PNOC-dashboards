@@ -1,4 +1,3 @@
-import os
 import tkinter as tk
 from tkinter import ttk, filedialog as fd
 from typing import get_args
@@ -37,7 +36,7 @@ class GUI():
     def __init__(self):
         # Initialize the window
         self.root = tk.Tk()
-        self.root.title("Test")
+        self.root.title("Datafile Recompiler")
         self.root.geometry("750x250")
         self.root.resizable(0,0)
 
