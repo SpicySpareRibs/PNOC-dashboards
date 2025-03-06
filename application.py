@@ -46,6 +46,8 @@ class GUI():
         self.text_font.configure(family="Segoe UI", size=10, weight="normal")
         self.bold_text_font = ["Segoe UI", 10, "bold"]
 
+        self.selected_datafile = tk.StringVar()
+
         # Initialize widgets
         header_bg = tk.Canvas(self.root, width=750, height=115, bg='#991E20')
         header_bg.create_line(0, 116, 750, 116, fill='#A6A6A6', width=2)
@@ -85,8 +87,8 @@ class GUI():
         select_datafile_label['text'] = "Select the Input Datafile"
         select_datafile_label.place(x=60, y=250)
 
-        self.select_datafile_entry = ttk.Entry(self.root, width=53)
-        self.select_datafile_entry.place(x=80, y=285)
+        select_datafile_entry = ttk.Entry(self.root, width=53, textvariable=self.selected_datafile)
+        select_datafile_entry.place(x=80, y=285)
 
         select_datafile_button = ttk.Button(self.root, text="Browse...", command=self.get_datafile)
         select_datafile_button.place(x=580, y=283)
@@ -108,11 +110,11 @@ class GUI():
         self.recompile_status['text'] = ""
 
     def get_datafile(self) -> None:
-        self.select_datafile_entry.insert(0, fd.askopenfilename())
+        self.selected_datafile.set(fd.askopenfilename())
         self.reset_status()
     
     def recompile(self) -> None:
-        datafile = Datafile(self.select_datafile_entry.get(), filetype=self.selected_recompiler.get())
+        datafile = Datafile(self.selected_datafile.get(), filetype=self.selected_recompiler.get())
         test_recompiler = RecompilerMaker.make(datafile)
         self.status_label_timer = 5
         try:
