@@ -124,15 +124,23 @@ class GUI():
         self.recompile_status['text'] = ""
 
     def get_datafile(self) -> None:
+<<<<<<< HEAD
         accepted_filetypes = [("Excel Files", "*.xlsx"), ("All Files", "*.*")]
         self.selected_datafile.set(fd.askopenfilename(filetypes=accepted_filetypes))
         sheets = list(pandas.read_excel(self.selected_datafile.get(), sheet_name=None).keys())
         self.select_sheet_combobox['values'] = sheets
         self.select_sheet_combobox.current(0)
+=======
+        self.selected_datafile.set(fd.askopenfilename())
+>>>>>>> 7966cef (Fixed bug on selecting datafiles)
         self.reset_status()
 
     def recompile(self) -> None:
+<<<<<<< HEAD
         datafile = Datafile(self.selected_datafile.get(), filetype=self.selected_recompiler.get(), sheet_name=self.selected_sheet.get)
+=======
+        datafile = Datafile(self.selected_datafile.get(), filetype=self.selected_recompiler.get())
+>>>>>>> 7966cef (Fixed bug on selecting datafiles)
         test_recompiler = RecompilerMaker.make(datafile)
         self.status_label_timer = 5
         try:
