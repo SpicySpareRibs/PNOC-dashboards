@@ -11,9 +11,10 @@ filetype = Literal[
     ]
 
 class Datafile:
-    def __init__(self, filepath,filetype: filetype):
+    def __init__(self, filepath,filetype: filetype, sheet_name: str):
         self.filepath = filepath
         self.filetype = filetype
+        self.sheet_name = sheet_name
 
 class Recompiler(Protocol):
     def read_datafile(self):

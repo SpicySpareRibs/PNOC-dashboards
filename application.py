@@ -1,3 +1,4 @@
+import pandas
 import tkinter as tk
 from tkinter import ttk, font, filedialog as fd
 from typing import get_args
@@ -97,6 +98,19 @@ class GUI():
         select_datafile_information['text'] = "Locate on your device the specific datafile to be recompiled."
         select_datafile_information.place(x=80, y=325)
 
+        select_sheet_label = ttk.Label(self.root, font=self.bold_text_font)
+        select_sheet_label['text'] = "Select Sheet: "
+        select_sheet_label.place(x=60, y=375)
+
+        self.selected_sheet = tk.StringVar()
+        self.select_sheet_combobox = ttk.Combobox(self.root, width = 27, textvariable = self.selected_sheet, postcommand = self.reset_status, state='readonly')
+        self.select_sheet_combobox['values'] = []
+        self.select_sheet_combobox.place(x=180, y=375)
+
+        select_sheet_information = ttk.Label(self.root, wraplength=630)
+        select_sheet_information['text'] = "Select the specific sheet of the datafile to be recompiled."
+        select_sheet_information.place(x=80, y=410)
+
         recompile_button = ttk.Button(self.root, text="Recompile", command=self.recompile)
         recompile_button.place(x=580, y=540)
 
@@ -110,11 +124,15 @@ class GUI():
         self.recompile_status['text'] = ""
 
     def get_datafile(self) -> None:
-        self.selected_datafile.set(fd.askopenfilename())
+        accepted_filetypes = [("Excel Files", "*.xlsx"), ("All Files", "*.*")]
+        self.selected_datafile.set(fd.askopenfilename(filetypes=accepted_filetypes))
+        sheets = list(pandas.read_excel(self.selected_datafile.get(), sheet_name=None).keys())
+        self.select_sheet_combobox['values'] = sheets
+        self.select_sheet_combobox.current(0)
         self.reset_status()
-    
+
     def recompile(self) -> None:
-        datafile = Datafile(self.selected_datafile.get(), filetype=self.selected_recompiler.get())
+        datafile = Datafile(self.selected_datafile.get(), filetype=self.selected_recompiler.get(), sheet_name=self.selected_sheet.get())
         test_recompiler = RecompilerMaker.make(datafile)
         self.status_label_timer = 5
         try:
