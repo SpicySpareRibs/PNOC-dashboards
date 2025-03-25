@@ -10,7 +10,7 @@ import warnings
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 class ProcMonitoringCompiler():
-    def __init__(self,datafile):
+    def __init__(self,datafile:Datafile):
         self._datafile = datafile
         self._dataframe = None
 
@@ -86,7 +86,7 @@ class ProcMonitoringCompiler():
         return final_headers
     
     def read_datafile(self):
-        df = pandas.read_excel(self._datafile.filepath,sheet_name="RMB-PMR 2024 ",header=[6,7])
+        df = pandas.read_excel(self._datafile.filepath,sheet_name=self._datafile.sheet_name,header=[6,7])
         
         hidden_cols = self.get_hidden_cols(len(df.columns))
         
@@ -256,8 +256,8 @@ class ProcMonitoringCompiler():
             self._record_stage.to_excel(writer,sheet_name="record stage",index=False)
 
 # Under Dev            
-df = Datafile(filepath="Procurement\\PMR.xlsx",filetype="Procurement Monitoring Report")
-test = ProcMonitoringCompiler(datafile=df)
-test.read_datafile()
-test.reformat()
-test.export()
+# df = Datafile(filepath="Procurement\\PMR.xlsx",filetype="Procurement Monitoring Report")
+# test = ProcMonitoringCompiler(datafile=df)
+# test.read_datafile()
+# test.reformat()
+# test.export()

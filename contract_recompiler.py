@@ -30,7 +30,7 @@ class ContractCompiler():
         pass
     def read_datafile(self):
         
-        self._dataframe = pandas.read_excel(self._datafile.filepath,header=2)
+        self._dataframe = pandas.read_excel(self._datafile.filepath,header=2,sheet_name=self._datafile.sheet_name)
         df = self._dataframe
         #renamed some columns based on specified in system requirements doc
         df = df.rename(columns={
