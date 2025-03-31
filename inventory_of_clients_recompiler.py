@@ -13,7 +13,7 @@ class InventoryOfClientsRecompiler:
         self._header_constraints = None
     
     def read_datafile(self):
-        df = pandas.read_excel(self._datafile.filepath,header=0)
+        df = pandas.read_excel(self._datafile.filepath,header=0,sheet_name=self._datafile.sheet_name)
         df.columns = pandas.Index([
             'Government Agency',
             'Status',

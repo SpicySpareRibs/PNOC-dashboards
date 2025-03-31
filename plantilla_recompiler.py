@@ -30,7 +30,7 @@ class PlantillaOfPersonnelCompiler():
         pass
     def read_datafile(self):
         
-        self._dataframe = pandas.read_excel(self._datafile.filepath,header=7)
+        self._dataframe = pandas.read_excel(self._datafile.filepath,header=7,sheet_name=self._datafile.sheet_name)
         df = self._dataframe
         #shorten columns by renaming
         df = df.rename(columns={

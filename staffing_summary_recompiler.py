@@ -3,7 +3,7 @@ from recompiler import Datafile, Recompiler
 import pandas as pd
 
 class StaffingSummaryRecompiler():
-    def __init__(self, datafile):
+    def __init__(self, datafile:Datafile):
         self._datafile = datafile
         self._dataframe = None
         
@@ -37,7 +37,7 @@ class StaffingSummaryRecompiler():
     
     def read_datafile(self):
         
-        self._dataframe = pd.read_excel(self._datafile.filepath,header=[3,4,5,6]) 
+        self._dataframe = pd.read_excel(self._datafile.filepath,header=[3,4,5,6],sheet_name=self._datafile.sheet_name) 
         
 
     def get_headers(self):

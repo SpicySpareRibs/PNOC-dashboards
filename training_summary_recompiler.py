@@ -29,7 +29,7 @@ class TrainingSummaryRecompiler():
 
     def read_datafile(self):
         #first arg is filepath, header argument is to specify which row column headers start
-        self._dataframe = pandas.read_excel(self._datafile.filepath,header=2)
+        self._dataframe = pandas.read_excel(self._datafile.filepath,header=2,sheet_name=self._datafile.sheet_name)
         
     def reformat(self):
         #listing is done to limit the columns included in each normalized table
