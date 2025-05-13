@@ -1,9 +1,12 @@
 __pycache__/
 
-#PyInstaller Output
+# PyInstaller Output
 build/
 dist/
 *.spec
 
-#Excel Files
+# Excel Files
 *.xlsx
+
+# log files
+*.log

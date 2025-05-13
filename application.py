@@ -1,4 +1,6 @@
 import pandas
+import logging
+import traceback
 import tkinter as tk
 from tkinter import ttk, font, filedialog as fd
 from typing import get_args
@@ -35,6 +37,14 @@ class RecompilerMaker():
 
 class GUI():
     def __init__(self):
+        # Initialize error logger
+        # Configure the logger to only show ERROR or higher messages
+        self.error_logger = logging.getLogger(__name__)
+        self.error_logger.setLevel(logging.ERROR)
+        
+        # Make logger file handler
+        self.error_log = None
+
         # Initialize the window
         self.root = tk.Tk()
         self.root.title("PNOC Datafile Recompiler")
@@ -140,8 +150,29 @@ class GUI():
             test_recompiler.reformat()
             test_recompiler.export()
             self.recompile_status['text'] = "Recompile Success!"
-        except:
+        except Exception as err:
             self.recompile_status['text'] = "Recompiling Failed!"
+            
+            # Get Error Details
+            error_details = ''.join(traceback.format_exception(type(err), err, err.__traceback__))
+            self.log_error(error_details)
+    
+    def log_error(self, error_message: str) -> None:
+        # Create log file if not yet created, else append to file
+        if self.error_log is None:
+            self.error_log = logging.FileHandler('errors.log', mode='a')
+            self.error_log.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
+            self.error_logger.addHandler(self.error_log)
+        
+        # Get current input to application
+        current_input = f"""
+Current Application Input
+Recompiler Type: {self.selected_recompiler.get()}
+Selected Datafile: {self.selected_datafile.get()}
+Selected Sheet: {self.selected_sheet.get()}
+"""
+
+        self.error_logger.error(error_message + current_input)
 
 def main():
     gui = GUI()
